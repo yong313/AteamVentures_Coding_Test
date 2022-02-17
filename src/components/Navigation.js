@@ -4,7 +4,7 @@ import { ReactComponent as AteamLogo } from "../static/logo/ateam_logo.svg";
 import { ReactComponent as NavIcon } from "../static/icons/nav_icon.svg";
 import { ReactComponent as MobileMenuBar } from "../static/icons/mobile_menu.svg";
 import MobileMenu from "./MobileMenu";
-
+//test
 const Navigation = (props) => {
   const wrapperRef = useRef();
   const [modalOpen, setModalOpen] = useState(false);
