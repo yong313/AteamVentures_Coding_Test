@@ -9,17 +9,17 @@ const SelectBoxTwo = (props) => {
   const wrapperRef = useRef();
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return() => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-  })
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
 
-  const handleClickOutside=(event)=>{
+  const handleClickOutside = (event) => {
     if (wrapperRef && !wrapperRef.current.contains(event.target)) {
       setIsActive(false);
     }
-  }
+  };
 
   return (
     <DropDown ref={wrapperRef}>
@@ -122,7 +122,7 @@ const DropDownContent = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 17px 12px;
+  padding: 18px 12px;
   animation: fadeInDropDown 0.25s;
   position: absolute;
 
@@ -141,19 +141,56 @@ const DropDownContent = styled.div`
 const Option = styled.div`
   width: 100%;
   height: auto;
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 14px;
 
   .check {
     cursor: pointer;
   }
 
-  input {
-    margin-right: 10px;
-
-    label {
-      font-size: 14px;
-      font-weight: 400;
+  input[type="checkbox"] {
+    margin: 0;
+    position: relative;
+    top: -4px;
+    &:checked:before {
+      content: "";
+      position: absolute;
+      left: 5px;
+      top: 0px;
+      width: 5px;
+      height: 10px;
+      border: 2.9px solid #ffffff;
+      border-width: 0 2.9px 2.9px 0;
+      transform: rotate(45deg);
+      background-color: #2196f3;
+      z-index: 1;
     }
+    &:before {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #939fa5;
+      border-radius: 2px;
+      background: #ffffff;
+    }
+    &:checked:after {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 2px #2196f3 solid;
+      border-radius: 2px;
+      background: #2196f3;
+    }
+  }
+
+  label {
+    padding-top: 1px;
+    margin-left: 14px;
+    font-size: 14px;
+    font-weight: 400;
   }
 `;
 
