@@ -50,6 +50,7 @@ const ContentBoxTwo = styled.div`
   height: auto;
   margin: 20px 0;
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
 `;
 
@@ -57,11 +58,20 @@ const LeftBox = styled.div`
   width: 50%;
   height: auto;
   display: flex;
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    margin-bottom: 20px;
+  }
 `;
 
 const RightBox = styled(LeftBox)`
   display: flex;
   justify-content: flex-end;
+
+  @media screen and (max-width: 500px) {
+    justify-content: flex-start;
+  }
 `;
 
 const ToggleText = styled.p`

@@ -1,26 +1,48 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-// 로고
 import { ReactComponent as AteamLogo } from "../static/logo/ateam_logo.svg";
-// A 가공 업체 아이콘
 import { ReactComponent as NavIcon } from "../static/icons/nav_icon.svg";
+import { ReactComponent as MobileMenuBar } from "../static/icons/mobile_menu.svg";
+import MobileMenu from "./MobileMenu";
 
 const Navigation = (props) => {
+  const wrapperRef = useRef();
+  const [modalOpen, setModalOpen] = useState(false);
+  const openModal = () => {
+    setModalOpen(true);
+  };
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
+
+  const handleClickOutside = (event) => {
+    if (wrapperRef && !wrapperRef.current.contains(event.target)) {
+      setModalOpen(false);
+    }
+  };
+
   return (
     <>
-      <NavBox>
+      <NavBox ref={wrapperRef}>
+        {/* 데스크탑 네비게이션 */}
         <LogoBox>
-          <AteamLogo />
+          {/* 모바일 네비게이션 */}
+          <MobileMenuBar id="mb_menu" onClick={openModal} />
+          <AteamLogo id="ateam_logo" />
         </LogoBox>
         <AnotherBox>
           <BtnTwo>
-            <NavIcon />
+            <NavIcon fill="#fff" />
             <NavText>A 가공 업체</NavText>
           </BtnTwo>
           <Line />
           <LogOutBtn>로그아웃</LogOutBtn>
         </AnotherBox>
       </NavBox>
+      <MobileMenu open={modalOpen} />
     </>
   );
 };
@@ -35,6 +57,7 @@ const NavBox = styled.div`
   left: 0;
   background-color: #1565c0;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.24);
+  z-index: 8;
 `;
 
 const LogoBox = styled.div`
@@ -44,12 +67,35 @@ const LogoBox = styled.div`
   align-items: center;
   padding-left: 40px;
   cursor: pointer;
+
+  #mb_menu {
+    display: none;
+    margin-right: 19px;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 100%;
+    padding-left: 23px;
+
+    #ateam_logo {
+      width: 91.8px;
+      height: 12px;
+    }
+    #mb_menu {
+      display: block;
+    }
+  }
 `;
 
 const AnotherBox = styled(LogoBox)`
   justify-content: flex-end;
   padding-left: 0;
   padding-right: 40px;
+
+  @media screen and (max-width: 500px) {
+    display: none;
+  }
+}
 `;
 
 const LogOutBtn = styled.button`

@@ -125,6 +125,7 @@ const DropDownContent = styled.div`
   padding: 18px 12px;
   animation: fadeInDropDown 0.25s;
   position: absolute;
+  z-index: 8;
 
   @keyframes fadeInDropDown {
     from {
