@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { ReactComponent as ArrowDown } from "../static/icons/arrow_drop_down.svg";
-import Checked from "./Checked";
 
 const SelectBox = (props) => {
   const [isActive, setIsActive] = useState(false);
