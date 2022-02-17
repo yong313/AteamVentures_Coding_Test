@@ -5,7 +5,7 @@ import { ReactComponent as ArrowDown } from "../static/icons/arrow_drop_down.svg
 const SelectBox = (props) => {
   const [isActive, setIsActive] = useState(false);
   const [selected, setSelected] = useState("");
-  // test
+  
   const wrapperRef = useRef();
 
   useEffect(() => {
