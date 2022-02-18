@@ -42,7 +42,7 @@ const ConTentOne = () => {
     functions: [onCheckedElement, onCheckedElementTwo],
     listState: [checkedList, checkedListTwo],
   };
-  
+
   // 필터링 리셋
   const fillterReset = () => {
     setCheckedList([]);
@@ -154,6 +154,18 @@ const FilteRingReset = styled.div`
   align-items: center;
   margin-left: 24px;
   cursor: pointer;
+  animation: fadeInFillterBtn 0.25s;
+
+  @keyframes fadeInFillterBtn {
+    from {
+      opacity: 0;
+      margin-top: -20px;
+    }
+    to {
+      opacity: 1;
+      margin-top: 0;
+    }
+  }
 `;
 
 const FilteRingText = styled.p`
