@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const Toggle = () => {
+const Toggle = (props) => {
   const [toggle, setToggle] = React.useState(false);
 
   return (

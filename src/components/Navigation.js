@@ -5,7 +5,7 @@ import { ReactComponent as NavIcon } from "../static/icons/nav_icon.svg";
 import { ReactComponent as MobileMenuBar } from "../static/icons/mobile_menu.svg";
 import MobileMenu from "./MobileMenu";
 
-const Navigation = (props) => {
+const Navigation = () => {
   const wrapperRef = useRef();
   const [modalOpen, setModalOpen] = useState(false);
   const openModal = () => {

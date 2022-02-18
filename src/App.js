@@ -1,11 +1,8 @@
 import React from "react";
-// 리셋 css
 import GlobalStyle from './shared/GlobalStyles';
-// 스타일 컴포넌트
 import styled from "styled-components";
-// components
 import Navigation from './components/Navigation';
-import ConTentOne from "./components/ContentsOne";
+import ConTentsOne from "./components/ContentsOne";
 
 function App() {
   return (
@@ -13,7 +10,7 @@ function App() {
       <GlobalStyle />
       <Navigation />
       <Container>
-        <ConTentOne />
+        <ConTentsOne />
       </Container>
     </>
   );

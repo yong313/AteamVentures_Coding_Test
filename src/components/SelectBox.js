@@ -3,50 +3,70 @@ import styled from "styled-components";
 import { ReactComponent as ArrowDown } from "../static/icons/arrow_drop_down.svg";
 
 const SelectBox = (props) => {
-  const { menuList, name } = props;
-
+  // props 넘겨받은 값
+  const { menuList, name, onCheckedElement, checkedList } = props;
+  // 드롭박스 상태관리
   const [isActive, setIsActive] = useState(false);
-  const [selected, setSelected] = useState("");
 
+  // 드롭박스 영역 밖 클릭 시 드롭박스 닫기
   const wrapperRef = useRef();
-
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   });
-
   const handleClickOutside = (event) => {
     if (wrapperRef && !wrapperRef.current.contains(event.target)) {
       setIsActive(false);
     }
   };
+  
+  // 체크박스 선택 된 숫자 + icon 컬러 변경
+  const count = checkedList.length ? `(${checkedList.length})` : null;
+  const arrow =
+    checkedList.length > 0 ? (
+      <ArrowDown fill="#fff" className="ArrowCss" />
+    ) : (
+      <ArrowDown fill="#939FA5" className="ArrowCss" />
+    );
 
   return (
-    <DropDown ref={wrapperRef}>
-      <DropDownBtn
-        onClick={() => {
-          setIsActive(!isActive);
-        }}
-      >
-        {name} {selected} <ArrowDown fill="#939FA5" className="ArrowCss" />
-      </DropDownBtn>
-      {isActive ? (
-        <DropDownContent>
-          {menuList.map((el, idx) => {
-            return (
-              <Option key={idx}>
-                <input type="checkbox" id={idx} className="check" />
-                <label htmlFor={idx} className="check">
-                  {el}
-                </label>
-              </Option>
-            );
-          })}
-        </DropDownContent>
-      ) : null}
-    </DropDown>
+    <>
+      <DropDown ref={wrapperRef}>
+        <DropDownBtn
+          fontColor={checkedList.length}
+          bgColor={checkedList.length}
+          onClick={() => {
+            setIsActive(!isActive);
+          }}
+        >
+          {name}
+          {count} {arrow}
+        </DropDownBtn>
+        {isActive ? (
+          <DropDownContent>
+            {menuList.map((item, idx) => {
+              return (
+                <Option key={idx}>
+                  <input
+                    type="checkbox"
+                    className="check"
+                    id={idx}
+                    onChange={(e) => onCheckedElement(e.target.checked, item)}
+                    checked={checkedList.includes(item) ? true : false}
+                  />
+
+                  <label htmlFor={idx} className="check">
+                    {item}
+                  </label>
+                </Option>
+              );
+            })}
+          </DropDownContent>
+        ) : null}
+      </DropDown>
+    </>
   );
 };
 
@@ -54,10 +74,6 @@ const DropDown = styled.div`
   width: auto;
   height: auto;
   margin-right: 8px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 `;
 
 const DropDownBtn = styled.div`
@@ -65,7 +81,8 @@ const DropDownBtn = styled.div`
   height: 32px;
   padding: 0 12px 0 12px;
   margin-bottom: 4px;
-  background-color: #fff;
+  ${(props) => (props.bgColor ? "background: #1565C0" : "background: #fff")};
+  ${(props) => (props.fontColor ? "color: #fff" : "color: #323D45")};
   border: 1.3px solid #939fa5;
   border-radius: 4px;
   display: flex;

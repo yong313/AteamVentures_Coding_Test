@@ -1,14 +1,53 @@
-import React from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import SelectBox from "./SelectBox";
 import Toggle from "./Toggle";
+import { ReactComponent as FilteRingIcon } from "../static/icons/filtering_icon.svg";
 
-const ConTentOne = (props) => {
+const ConTentOne = () => {
   const name = ["가공방식", "재료"];
   const menuList = [
     ["밀링", "선반"],
     ["알루미늄", "탄소강", "구리", "합금강", "강철"],
   ];
+
+  // 체크 된 아이템 상태 관리 및 이벤트 - 가공방식
+  const [checkedList, setCheckedList] = useState([]);
+  const onCheckedElement = useCallback(
+    (checked, item) => {
+      if (checked) {
+        setCheckedList([...checkedList, item]);
+      } else {
+        setCheckedList(checkedList.filter((el) => el !== item));
+      }
+    },
+    [checkedList]
+  );
+
+  // 체크 된 아이템 상태 관리 및 이벤트 - 재료
+  const [checkedListTwo, setCheckedListTwo] = useState([]);
+  const onCheckedElementTwo = useCallback(
+    (checked, item) => {
+      if (checked) {
+        setCheckedListTwo([...checkedListTwo, item]);
+      } else {
+        setCheckedListTwo(checkedListTwo.filter((el) => el !== item));
+      }
+    },
+    [checkedListTwo]
+  );
+
+  // 자식요소에 넘겨주기
+  const checkedHandler = {
+    functions: [onCheckedElement, onCheckedElementTwo],
+    listState: [checkedList, checkedListTwo],
+  };
+  
+  // 필터링 리셋
+  const fillterReset = () => {
+    setCheckedList([]);
+    setCheckedListTwo([]);
+  };
 
   return (
     <>
@@ -19,8 +58,26 @@ const ConTentOne = (props) => {
       <ContentBoxTwo>
         <LeftBox>
           {menuList.map((item, idx) => {
-            return <SelectBox key={idx} menuList={item} name={name[idx]} />;
+            return (
+              <SelectBox
+                key={idx}
+                menuList={item}
+                name={name[idx]}
+                onCheckedElement={checkedHandler.functions[idx]}
+                checkedList={checkedHandler.listState[idx]}
+              />
+            );
           })}
+          {checkedList.length || checkedListTwo.length ? (
+            <FilteRingReset
+              onClick={() => {
+                fillterReset();
+              }}
+            >
+              <FilteRingIcon />
+              <FilteRingText>필터링 리셋</FilteRingText>
+            </FilteRingReset>
+          ) : null}
         </LeftBox>
         <RightBox>
           <Toggle />
@@ -56,6 +113,11 @@ const ContentBoxTwo = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 
 const LeftBox = styled.div`
@@ -83,6 +145,22 @@ const ToggleText = styled.p`
   font-weight: 400;
   margin-left: 16px;
   padding-top: 2px;
+`;
+
+const FilteRingReset = styled.div`
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  margin-left: 24px;
+  cursor: pointer;
+`;
+
+const FilteRingText = styled.p`
+  font-size: 12px;
+  color: #2196f3;
+  padding-top: 3px;
+  margin-left: 12px;
 `;
 
 export default ConTentOne;
