@@ -4,12 +4,11 @@ import SelectBox from "./SelectBox";
 import Toggle from "./Toggle";
 
 const ConTentOne = (props) => {
+  const name = ["가공방식", "재료"];
   const menuList = [
     ["밀링", "선반"],
     ["알루미늄", "탄소강", "구리", "합금강", "강철"],
   ];
-
-  const name = ["가공방식", "재료"];
 
   return (
     <>

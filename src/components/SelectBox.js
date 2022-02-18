@@ -42,7 +42,7 @@ const SelectBox = (props) => {
                   {el}
                 </label>
               </Option>
-            )
+            );
           })}
         </DropDownContent>
       ) : null}
