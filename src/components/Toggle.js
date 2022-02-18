@@ -20,6 +20,7 @@ const Toggle = () => {
 
 const ToggleContainer = styled.div`
   width: auto;
+  cursor: pointer;
 `;
 
 const ToggleSwitch = styled.div`

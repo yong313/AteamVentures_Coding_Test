@@ -1,22 +1,27 @@
 import React from "react";
 import styled from "styled-components";
 import SelectBox from "./SelectBox";
-import SelectBoxTwo from "./SelectBoxTwo";
 import Toggle from "./Toggle";
 
 const ConTentOne = (props) => {
+  const menuList = [
+    ["밀링", "선반"],
+    ["알루미늄", "탄소강", "구리", "합금강", "강철"],
+  ];
+
+  const name = ["가공방식", "재료"];
+
   return (
     <>
-      {/* 상단 텍스트 */}
       <ContentBox>
         <HeadText>들어온 요청</HeadText>
         <SubText>파트너님에게 딱 맞는 요청서를 찾아보세요.</SubText>
       </ContentBox>
-      {/* 하단 필터 */}
       <ContentBoxTwo>
         <LeftBox>
-          <SelectBox />
-          <SelectBoxTwo />
+          {menuList.map((item, idx) => {
+            return <SelectBox key={idx} menuList={item} name={name[idx]} />;
+          })}
         </LeftBox>
         <RightBox>
           <Toggle />
@@ -51,7 +56,7 @@ const ContentBoxTwo = styled.div`
   margin: 20px 0;
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  align-items: center;
 `;
 
 const LeftBox = styled.div`
@@ -66,7 +71,7 @@ const LeftBox = styled.div`
 `;
 
 const RightBox = styled(LeftBox)`
-  display: flex;
+  align-items: center;
   justify-content: flex-end;
 
   @media screen and (max-width: 500px) {
@@ -78,6 +83,7 @@ const ToggleText = styled.p`
   font-size: 14px;
   font-weight: 400;
   margin-left: 16px;
+  padding-top: 2px;
 `;
 
 export default ConTentOne;

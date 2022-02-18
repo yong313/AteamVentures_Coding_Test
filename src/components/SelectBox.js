@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { ReactComponent as ArrowDown } from "../static/icons/arrow_drop_down.svg";
 
 const SelectBox = (props) => {
+  const { menuList, name } = props;
+
   const [isActive, setIsActive] = useState(false);
   const [selected, setSelected] = useState("");
 
@@ -28,22 +30,20 @@ const SelectBox = (props) => {
           setIsActive(!isActive);
         }}
       >
-        가공방식 {selected} <ArrowDown fill="#939FA5" className="ArrowCss" />
+        {name} {selected} <ArrowDown fill="#939FA5" className="ArrowCss" />
       </DropDownBtn>
       {isActive ? (
         <DropDownContent>
-          <Option>
-            <input type="checkbox" id="one" className="check" />
-            <label htmlFor="one" className="check">
-              밀링
-            </label>
-          </Option>
-          <OptionEnd>
-            <input type="checkbox" id="two" className="check" />
-            <label htmlFor="two" className="check">
-              선반
-            </label>
-          </OptionEnd>
+          {menuList.map((el, idx) => {
+            return (
+              <Option key={idx}>
+                <input type="checkbox" id={idx} className="check" />
+                <label htmlFor={idx} className="check">
+                  {el}
+                </label>
+              </Option>
+            )
+          })}
         </DropDownContent>
       ) : null}
     </DropDown>
@@ -110,6 +110,10 @@ const DropDownContent = styled.div`
   position: absolute;
   z-index: 8;
 
+  & > :last-child {
+    margin-bottom: 0;
+  }
+
   @keyframes fadeInDropDown {
     from {
       opacity: 0;
@@ -137,6 +141,7 @@ const Option = styled.div`
     margin: 0;
     position: relative;
     top: -4px;
+
     &:checked:before {
       content: "";
       position: absolute;
@@ -176,10 +181,6 @@ const Option = styled.div`
     font-size: 14px;
     font-weight: 400;
   }
-`;
-
-const OptionEnd = styled(Option)`
-  margin-bottom: 0;
 `;
 
 export default SelectBox;

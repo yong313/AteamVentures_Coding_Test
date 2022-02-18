@@ -43,6 +43,17 @@ const ModalBackground = styled.div`
   top: 0;
   left: 0;
   z-index: 9;
+
+  animation: fadeInBackground 0.35s;
+
+  @keyframes fadeInBackground {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 `;
 
 const ModalContents = styled.div`
@@ -50,12 +61,12 @@ const ModalContents = styled.div`
   height: 100vh;
   overflow: hidden;
   background-color: #fff;
-  animation: fadeInModal 0.25s;
+  animation: fadeInModal 0.45s;
 
   @keyframes fadeInModal {
     from {
       opacity: 0;
-      margin-left: -200px;
+      margin-left: -600px;
     }
     to {
       opacity: 1;
