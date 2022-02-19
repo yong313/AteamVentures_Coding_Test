@@ -52,7 +52,7 @@ const NavBox = styled.div`
   height: 70px;
   display: flex;
   align-items: center;
-  position: fixed;
+  position: relative;
   top: 0;
   left: 0;
   background-color: #1565c0;

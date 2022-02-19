@@ -109,7 +109,7 @@ const SubText = styled(HeadText)`
 const ContentBoxTwo = styled.div`
   width: 100%;
   height: auto;
-  margin: 20px 0;
+  margin: 20px 0 32px 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

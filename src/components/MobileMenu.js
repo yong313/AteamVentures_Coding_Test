@@ -44,7 +44,7 @@ const ModalBackground = styled.div`
   left: 0;
   z-index: 9;
 
-  animation: fadeInBackground 0.35s;
+  animation: fadeInBackground 0.25s;
 
   @keyframes fadeInBackground {
     from {
