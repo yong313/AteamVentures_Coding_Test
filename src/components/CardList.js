@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const CardList = () => {
+const CardList = (props) => {
   return (
     <>
       <CardListBox>

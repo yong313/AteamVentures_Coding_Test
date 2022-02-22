@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Navigation from './components/Navigation';
 import ConTentsOne from "./components/ContentsOne";
 import ContentsTwo from "./components/ContentsTwo";
+import Api from "./shared/Api";
 
 function App() {
   return (
